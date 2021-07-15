@@ -82,8 +82,13 @@
 				</ul>
 			</nav>
 			<!-- .nav-menu -->
-
-			<a href="courses.html" class="get-started-btn">Get Started</a>
+           					<security:authorize access="!isAuthenticated()">
+		<a href="<%=request.getContextPath()%>/login" class="get-started-btn">Get Started</a>
+					</security:authorize>
+					<security:authorize access="isAuthenticated()">
+		<a href="<%=request.getContextPath()%>/homepage" class="get-started-btn">Get Started</a>
+					</security:authorize>
+	
 
 		</div>
 	</header>

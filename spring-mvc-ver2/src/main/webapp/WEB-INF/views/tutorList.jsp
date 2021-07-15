@@ -37,7 +37,6 @@
        <td>  <button class="delete" data-confirm="Are you sure to delete this item?" href="deleteTutor/${tutor.id}"> delete </button>
          <script > $('.delete').on("click", function (e) {
             e.preventDefault();
-
             var choice = confirm($(this).attr('data-confirm'));
 
             if (choice) {

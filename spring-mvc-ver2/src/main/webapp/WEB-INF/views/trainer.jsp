@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Mentor Bootstrap Template - Index</title>
+  <title>Trainers</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,6 +28,11 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  </script>
+  </head>
 <body>
 
  <%@include file="layout/header.jsp" %> 
@@ -54,11 +59,12 @@
             <div class="member">
               <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
               <div class="member-content">
-                <h4>${tutor.name}</h4>
-                <span><div>Môn</div>${tutor.subject}</span>
+                <h4>${tutor.gender} ${tutor.name}</h4>
+                <div>Subject: ${tutor.subjects}</div>
                 <p>
                 ${tutor.description}
                 </p>
+                <p>$</p>
                 <div class="social">
                   <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>

@@ -56,7 +56,7 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 	@Override
 	public void insert(Tutor t) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO tutor(id_Tutor,Tutor_name,Tutor_address, Tutor_credential,Tutor_experienceyear) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO tutor(id_Tutor,Tutor_name,Tutor_gender,Tutor_phonenumber,Tutor_address, Tutor_credential,Tutor_experienceyear,Tutor_description) VALUES (?,?,?,?,?,?,?,?)";
 		insert(sql, t);
 	}
 
@@ -70,7 +70,7 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 
 	@Override
 	public boolean update(Tutor t) {
-		String sql = "UPDATE tutor SET Tutor_name=?,Tutor_address=?,Tutor_credential=?,Tutor_experienceYear=? WHERE id_Tutor=?";
+		String sql = "UPDATE tutor SET Tutor_name=?,Tutor_gender=?,Tutor_phonenumber=?,Tutor_address=?,Tutor_credential=?,Tutor_experienceYear=?,Tutor=description WHERE id_Tutor=?";
 		System.out.println(t.toString() + " DAO");
 		try {
 			update(sql, t);
@@ -140,7 +140,7 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
       List<Tutor> list = dao.findAll();
 		   for(Tutor t :list) {
 				  String subjectName = dao.getSubjectName(dao.SubjectsOfTutor(t.getId()));
-				 t.setSubject(subjectName);
+				 t.setSubjects(subjectName);
 			   }
 		   return list;
 	}

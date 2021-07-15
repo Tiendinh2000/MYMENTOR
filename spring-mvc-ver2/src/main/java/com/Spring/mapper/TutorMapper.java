@@ -16,11 +16,13 @@ public class TutorMapper implements RowMapper {
 		try {
 			Tutor t = new Tutor();
 			t.setId(rs.getInt("id_Tutor"));
+			t.setGender(rs.getString("Tutor_gender"));
+			t.setPhonenumber(rs.getString("Tutor_phonenumber"));
 			t.setName(rs.getString("Tutor_name"));
 			t.setAddress(rs.getString("Tutor_address"));
 			t.setCredential(rs.getString("Tutor_credential"));
 			t.setExperienceYear(rs.getInt("Tutor_experienceYear"));
-	
+      	t.setDescription(rs.getString("Tutor_description"));
 			return t;
 		}catch(SQLException e) {
 			return null;
