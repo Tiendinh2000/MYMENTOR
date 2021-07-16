@@ -14,6 +14,7 @@ import com.Spring.DAO.ISubjectDAO;
 import com.Spring.Models.Subject;
 import com.Spring.Models.Tutor;
 import com.Spring.mapper.SubjectMapper;
+import com.Spring.mapper.TutorMapper;
 
 @Repository
 public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
@@ -27,7 +28,7 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 	public static void main(String[] args) {
 		SubjectDAO d = new SubjectDAO();
 
-		System.out.println(d.SubjectsOfTeacher(2));
+		System.out.println(d.findTutorsBySubject("Math"));
 	}
 
 	public List<Subject> SubjectsOfTeacher(int id) {
@@ -53,13 +54,29 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 		return list;
 	}
 
-	public List<Tutor> allInFor(){
+	public List<Tutor> findTutorsBySubject(String nameOfSubject){
 		
 		
+		String sql =  "SELECT * FROM tutor "
+				+ "JOIN tutor_subject ON tutor.id_Tutor=tutor_subject.tutor_id_Tutor "
+				+ "JOIN subject ON subject.id_subject = tutor_subject.subject_id_subject "
+				+ "WHERE subject_name=?"; 
 		
-		
-		return null;
-		
+		List<Tutor> list = new ArrayList<Tutor>();
+		try {
+			Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,nameOfSubject );
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+Tutor t = new TutorMapper().mapRow(rs, 0);
+				list.add(t);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 }

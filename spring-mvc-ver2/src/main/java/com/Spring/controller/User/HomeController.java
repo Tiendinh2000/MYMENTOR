@@ -23,6 +23,8 @@ public class HomeController {
 	@Autowired
 	HomeService HomeService;
 	
+	
+	
 	@RequestMapping(value="/user/homepage",method=RequestMethod.GET)
 	public ModelAndView page() {
 		ModelAndView mav = new ModelAndView("Homepage");
@@ -32,7 +34,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/user/login",method=RequestMethod.GET)
 	public ModelAndView getLoging() {
-		ModelAndView mav = new ModelAndView("userLogin");
+		ModelAndView mav = new ModelAndView("/user/userLogin");
 		return mav;
 	}
 	
@@ -41,7 +43,7 @@ public class HomeController {
 	public ModelAndView RegisterPage( ) {
 		UserAccount acc = new UserAccount();
 		
-		ModelAndView mav = new ModelAndView("register");
+		ModelAndView mav = new ModelAndView("/user/register");
 		mav.addObject("newAccount",acc);
 		return mav;
 	
@@ -60,11 +62,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/user/trainer", method = RequestMethod.GET)
 	public ModelAndView TutorListPage() {
-		ModelAndView mav = new ModelAndView("trainer");
+		ModelAndView mav = new ModelAndView("/user/trainer");
 		mav.addObject("Tutormenu",HomeService.TutorWithSubject());
 		return mav;
 	}
 	
+
 	
 	@RequestMapping("/user/homepage")
 	private String UserSuccess() {

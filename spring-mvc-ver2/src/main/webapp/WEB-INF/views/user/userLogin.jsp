@@ -30,7 +30,7 @@
 <!------ Include the above in your HEAD tag ---------->
 </head>
 <body>
-<%@include file="layout/header.jsp" %>
+<%@include file="/WEB-INF/views/layout/header.jsp"%>
 
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
 

@@ -35,7 +35,7 @@
   </head>
 <body>
 
- <%@include file="layout/header.jsp" %> 
+ <%@include file="/WEB-INF/views/layout/header.jsp" %> 
 
 <main id="main" data-aos="fade-in">
 
@@ -84,7 +84,7 @@
 
   </main><!-- End #main -->
 
-<%@include file="layout/footer.jsp" %>
+<%@include file="/WEB-INF/views/layout/header.jsp" %>
 
 
   <!-- Vendor JS Files -->

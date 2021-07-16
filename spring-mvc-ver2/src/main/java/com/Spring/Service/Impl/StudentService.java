@@ -7,5 +7,4 @@ import com.Spring.Service.IStudentService;
 @Service
 public class StudentService implements IStudentService {
 
-	
 }

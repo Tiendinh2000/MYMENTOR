@@ -26,7 +26,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/admin/TutorList", method = RequestMethod.GET)
 	public ModelAndView TutorListPage() {
-		ModelAndView mav = new ModelAndView("tutorList");
+		ModelAndView mav = new ModelAndView("/admin/tutorList");
 		mav.addObject("Tutormenu",homeService.findAll());
 		return mav;
 	}
@@ -34,7 +34,7 @@ public class HomeController {
 	@RequestMapping(value = "/admin/insertPage", method = RequestMethod.GET)
 	public ModelAndView inputPage() {
 		Tutor newTutor = new Tutor();
-		ModelAndView mav = new ModelAndView("insert");
+		ModelAndView mav = new ModelAndView("/admin/insert");
 		mav.addObject("newTutor",newTutor);
 		return mav;
 		
@@ -57,7 +57,7 @@ public class HomeController {
 	@RequestMapping(value = "/admin/editTutorPage", method = RequestMethod.GET)
 	public ModelAndView updatePage(@RequestParam("id") int id) {
 		//editId=id; 
-		ModelAndView mav =  new ModelAndView("editTutor");
+		ModelAndView mav =  new ModelAndView("/admin/editTutor");
 	    Tutor t = homeService.findByID(id);
 		mav.addObject("editedTutor",t);
 		return mav;

@@ -87,7 +87,7 @@ var check = function() {
 	}</script>
 </head>
 <body>
-	<%@include file="layout/header.jsp" %>
+	<%@include file="/WEB-INF/views/layout/header.jsp" %>
 
 	<form:form action="./Register" method="POST"
 		modelAttribute="newAccount">
@@ -131,6 +131,6 @@ var check = function() {
 	</form:form>
 	
 	
-	<%@include file="layout/footer.jsp" %>
+	<%@include file="/WEB-INF/views/layout/header.jsp" %>
 </body>
 </html>

@@ -12,13 +12,23 @@ import com.Spring.Service.Impl.SubjectService;
 public class SubjectController {
 
 	@Autowired
-	SubjectService service;
+	SubjectService subjectService;
 	
-//	@RequestMapping(value="/user/homepage",method=RequestMethod.GET)
-//	public ModelAndView page() {
-//		ModelAndView mav = new ModelAndView("Homepage");
-//		return mav;
-//	
-//	}
+
+	@RequestMapping(value = "/user/math_tutors", method = RequestMethod.GET)
+	public ModelAndView Math_TutorList() {
+		ModelAndView mav = new ModelAndView("/user/math-trainer");
+		mav.addObject("tutorList",subjectService.FindTutorBySubject("Math"));
+		mav.addObject("SubjectName", "Math");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/user/literature_tutors", method = RequestMethod.GET)
+	public ModelAndView literature_TutorList() {
+		ModelAndView mav = new ModelAndView("/user/math-trainer");
+		mav.addObject("tutorList",subjectService.FindTutorBySubject("Literature"));
+		mav.addObject("SubjectName", "Literature");
+		return mav;
+	}
 	
 }

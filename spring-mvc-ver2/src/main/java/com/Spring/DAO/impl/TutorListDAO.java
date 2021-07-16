@@ -35,7 +35,7 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 		
 		TutorListDAO l = new TutorListDAO();
 		
-		System.out.println(l.TutorWithSubjectList());
+		System.out.println(l.SubjectsOfTutor(0));
 		
 //		List<Tutor> l1 = l.findAll();
 //	   for(Tutor t :l1) {
