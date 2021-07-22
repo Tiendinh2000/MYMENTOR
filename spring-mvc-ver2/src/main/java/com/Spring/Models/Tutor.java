@@ -9,8 +9,9 @@ public class Tutor {
 	private String credential;
 	private String address;
 	private int experienceYear;
-private String subjects;
-private String description;
+
+    private String description;
+    private int Account_id;
 	public Tutor() {
 	}
 
@@ -18,7 +19,7 @@ private String description;
 		this.id = id;
 	}
 
-	public Tutor(int id, String name, String gender, String phonenumber, String address, String credential, int experienceYear,String subjects,String description) {
+	public Tutor(int id, String name, String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
 		this.id = id;
 		this.credential = credential;
 		this.gender=gender;
@@ -26,21 +27,25 @@ private String description;
 		this.name = name;
 		this.address = address;
 		this.experienceYear = experienceYear;
-		this.subjects=subjects;
+
 		this.description=description;
+		this.Account_id=AccountId;
 	}
 
-	public Tutor(String name,String gender, String phonenumber, String address, String credential, int experienceYear,String subjects,String description) {
+	public Tutor(String name,String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
 		this.credential = credential;
 		this.gender=gender;
 		this.phonenumber=phonenumber;
 		this.name = name;
 		this.address = address;
 		this.experienceYear = experienceYear;
-		this.subjects=subjects;
-this.description= description;
+        this.description= description;
+    	this.Account_id=AccountId;
 	}
 
+
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -98,17 +103,6 @@ this.description= description;
 		this.phonenumber = phonenumber;
 	}
 
-	
-	
-	
-	
-	public String getSubjects() {
-		return subjects;
-	}
-
-	public void setSubjects(String subjects) {
-		this.subjects = subjects;
-	}
 
 	public String getDescription() {
 		return description;
@@ -118,10 +112,21 @@ this.description= description;
 		this.description = description;
 	}
 
+	
+	
+	
+	public int getAccount_id() {
+		return Account_id;
+	}
+
+	public void setAccount_id(int account_id) {
+		Account_id = account_id;
+	}
+
 	@Override
 	public String toString() {
 		return "Tutor [id=" + id + ", name= " + name + ", gender="+gender+", phonenumber= "+phonenumber+", credential="  + credential + ", address=" + address
-				+ ", experienceYear=" + experienceYear + ",des= " + description+ ", subject =" +subjects+"]";
+				+ ", experienceYear=" + experienceYear + ",des= " + description+ "]";
 	}
 
 }

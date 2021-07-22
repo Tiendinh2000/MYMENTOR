@@ -13,7 +13,7 @@ public class UserAccountMapper implements RowMapper {
 	public UserAccount mapRow(ResultSet rs, int rowNum) throws SQLException {
 		try {
 			UserAccount u = new UserAccount();
-			u.setId(rs.getInt("id_useraccount"));
+			u.setId(rs.getInt("id_user"));
 			u.setUserName(rs.getString("username"));
 			u.setPassword(rs.getString("password"));
 			u.setRole(rs.getString("role"));

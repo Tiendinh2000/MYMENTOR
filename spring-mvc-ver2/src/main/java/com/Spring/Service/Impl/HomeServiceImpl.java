@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.Spring.DAO.ITutorDAO;
 import com.Spring.DAO.impl.TutorListDAO;
 import com.Spring.Models.Tutor;
+import com.Spring.Models.UserAccount;
 import com.Spring.Service.HomeService;
 
 @Service
@@ -49,7 +50,9 @@ public class HomeServiceImpl implements HomeService{
 		  return null;
 	}
 
-	public List<Tutor> TutorWithSubject(){
-	return dao.TutorWithSubjectList();
-	}
+	
+	
+
+
+	
 }

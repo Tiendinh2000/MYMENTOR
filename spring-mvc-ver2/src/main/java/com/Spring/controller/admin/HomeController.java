@@ -17,7 +17,9 @@ import com.Spring.Models.Tutor;
 import com.Spring.Service.HomeService;
 import com.Spring.Service.Impl.HomeServiceImpl;
 
-@Controller(value="adminController")
+//@Controller(value="adminController")
+
+@Controller
 public class HomeController {
 
 	@Autowired

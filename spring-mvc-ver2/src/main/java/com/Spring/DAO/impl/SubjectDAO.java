@@ -28,10 +28,31 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 	public static void main(String[] args) {
 		SubjectDAO d = new SubjectDAO();
 
-		System.out.println(d.findTutorsBySubject("Math"));
+		System.out.println(d.findSubjectsOfTeacher(4).toString());
 	}
 
-	public List<Subject> SubjectsOfTeacher(int id) {
+	public boolean registrySubject(int IdTutor, int IdSubject) {
+		String sql ="INSERT INTO tutor_subject VALUES (?,?)";
+		Connection connection;
+		PreparedStatement preparedStatement;
+		try {
+			connection = getConnection();
+			 preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, IdTutor);
+			preparedStatement.setInt(2, IdSubject);
+			
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+		
+	}
+	
+	public List<Subject> findSubjectsOfTeacher(int id) {
 		String sql = "SELECT *  FROM subject "
 				+ "INNER JOIN tutor_subject ON tutor_subject.subject_id_subject=subject.id_subject "
 				+ "INNER JOIN fasttutor.tutor ON tutor.id_Tutor= tutor_subject.tutor_id_Tutor " + "WHERE id_Tutor=? ";

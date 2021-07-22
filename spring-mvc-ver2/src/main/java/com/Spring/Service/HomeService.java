@@ -11,5 +11,4 @@ public interface HomeService {
   void delete(int id);
   void update(Tutor newTutor );
   Tutor findByID(int id);
-  List<Tutor> TutorWithSubject();
 }

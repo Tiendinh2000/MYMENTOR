@@ -10,15 +10,15 @@ public class UserAccount {
 
 	public UserAccount(int id, String userName, String password, String role, int enable) {
 		this.id = id;
-		userName = userName;
-		password = password;
+		this.userName = userName;
+		this.password = password;
 		this.role = role;
 		this.enable = enable;
 	}
 	
 	public UserAccount(String userName, String password) {
-		userName = userName;
-		password = password;
+		this.userName = userName;
+		this.password = password;
 
 	}
 	public String getRole() {
@@ -70,10 +70,12 @@ public class UserAccount {
 		this.id = id;
 	}
 
-@Override
-public String toString() {
-	// TODO Auto-generated method stub
-	return super.toString();
-}
+	@Override
+	public String toString() {
+		return "UserAccount [id=" + id + ", userName=" + userName + ", password=" + password + ", role=" + role
+				+ ", enable=" + enable + "]";
+	}
+
+
 
 }

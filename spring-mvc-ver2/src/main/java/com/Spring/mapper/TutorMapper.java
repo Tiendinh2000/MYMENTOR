@@ -23,6 +23,7 @@ public class TutorMapper implements RowMapper {
 			t.setCredential(rs.getString("Tutor_credential"));
 			t.setExperienceYear(rs.getInt("Tutor_experienceYear"));
       	t.setDescription(rs.getString("Tutor_description"));
+      	t.setAccount_id(rs.getInt("fk_AccountId"));
 			return t;
 		}catch(SQLException e) {
 			return null;

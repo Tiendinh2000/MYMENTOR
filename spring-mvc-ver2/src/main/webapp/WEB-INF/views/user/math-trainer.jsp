@@ -1,4 +1,3 @@
-<%@page import="com.Spring.controller.User.HomeController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -33,8 +32,6 @@
   <script type="text/javascript">
 
   </script>
-  
-
   </head>
 <body>
 
@@ -45,8 +42,8 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
       <div class="container">
-        <h2>Trainers</h2>
-        <p>Always try and do our best to bring EXPERIENCE - STRATEGY - PRESTIGE teachers and students for every family. In addition to being teachers, tutors tutoring knowledge: Math - Physics - Chemistry - English - Literature ... for children, they are also a support person in their future orientation. Come to the MyMentor Center, parents are not only assured of the quality of our teachers, but our services are also very reasonable. </p>
+        <h2>Trainers for ${SubjectName}</h2>
+        <p>They are all out best teacher for Mathematics. They will make it easier for everyone </p>
       </div>
     </div><!-- End Breadcrumbs -->
 
@@ -56,19 +53,18 @@
 
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
         
-        <c:forEach items="${hashmap}" var="entry">
-
+        <c:forEach items="${tutorList}" var="tutor">
+        
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
               <div class="member-content">
-                <h4>${entry.key.name}</h4>
-              
-                <div>Subject: ${entry.value}</div>
+                <h4>${tutor.gender} ${tutor.name}</h4>
+                <div>Subject: ${SubjectName}</div>
                 <p>
-         
+                ${tutor.description}
                 </p>
-                <p>$</p>
+          <p>   <div>Address: ${tutor.address}</div><div>Experiences : ${tutor.experienceYear }</div></p>   
                 <div class="social">
                   <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>
@@ -78,6 +74,7 @@
               </div>
             </div>
           </div>
+          
 </c:forEach>
 
         </div>

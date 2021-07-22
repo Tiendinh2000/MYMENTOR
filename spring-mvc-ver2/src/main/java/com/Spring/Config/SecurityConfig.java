@@ -35,13 +35,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/admin/**").authenticated();
 		http.csrf().disable().authorizeRequests().antMatchers("/homepage").permitAll()
-			    .antMatchers("/admin/**").permitAll()
 			    .antMatchers("/user/**").permitAll()
-				.and().formLogin().loginPage("/login").permitAll().loginProcessingUrl("/j_spring_security_check")
+				.and().formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check")
 				.usernameParameter("username").passwordParameter("password")
-				.successHandler(authenticationSuccessHandler).failureUrl("/login?error=fail").and().exceptionHandling()
-				.accessDeniedPage("/404").and().logout().logoutSuccessUrl("/user/login");
+				.successHandler(authenticationSuccessHandler).failureUrl("/login?error=fail")
+				.and().exceptionHandling().accessDeniedPage("/404")
+				.and().logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/user/login")
+	            .and()
+	            .rememberMe().rememberMeParameter("remember-me")
+	            .key("uniqueAndSecret").tokenValiditySeconds(86400);
 
 
 	}

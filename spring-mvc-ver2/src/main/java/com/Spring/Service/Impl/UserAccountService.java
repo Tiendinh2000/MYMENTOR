@@ -28,7 +28,15 @@ public class UserAccountService implements IUserAccountService {
 		return null;
 	}
 
-
+	
+	public int findIdByUserName(String name) throws NullPointerException {
+	List<UserAccount> list = dao.findIdByUserName(name);
+	if(list.size()==1) {
+		return list.get(0).getId();
+	}
+	else
+		throw new NullPointerException("can not find id of :"+name);
+	}
 
 
 }

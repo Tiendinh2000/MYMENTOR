@@ -47,7 +47,9 @@
 
 			<nav class="nav-menu d-none d-lg-block">
 				<ul>
-					<li class="active"><a href="<%=request.getContextPath()%>/homepage">Home</a></li>
+					<li class="active"><a
+						href="<%=request.getContextPath()%>/homepage">Home</a></li>
+
 
 					<security:authorize access="!isAuthenticated()">
 						<li><a href="<%=request.getContextPath()%>/login">Login</a></li>
@@ -57,36 +59,46 @@
 						<li><a href="<c:url value="/logout" />">logout</a></li>
 					</security:authorize>
 
-					<li><a href="about.html">About</a></li>
-					<li><a href="courses.html">Courses</a></li>
+
 					<li><a href="<%=request.getContextPath()%>/user/trainer">Trainers</a></li>
-					<li><a href="events.html">Events</a></li>
-					<li><a href="pricing.html">Pricing</a></li>
-					<li class="drop-down"><a href="">Drop Down</a>
+					<security:authorize access="isAuthenticated()">
+						<li class="drop-down"><a href="">Creation</a>
+							<ul>
+								<li><a
+									href="<%=request.getContextPath()%>/user/registryTutorPage">Registery your self as Tutor</a></li>
+							</ul></li>
+					</security:authorize>
+					<li class="drop-down"><a href="">Subject</a>
 						<ul>
 							<li><a href="<%=request.getContextPath()%>/user/math_tutors">Math</a></li>
 							<li class="drop-down"><a href="#">Find Your Subject</a>
 								<ul>
 									<li><a>Math</a></li>
 									<li><a href="#">English</a></li>
-									<li><a >Literature</a></li>
+									<li><a>Literature</a></li>
 								</ul></li>
-							<li><a href="#">English</a></li>
-							<li><a href="<%=request.getContextPath()%>/user/literature_tutors">Literature</a></li>
-							
+							<li><a
+								href="<%=request.getContextPath()%>/user/english_tutors">English</a></li>
+							<li><a
+								href="<%=request.getContextPath()%>/user/literature_tutors">Literature</a></li>
 						</ul></li>
 					<li><a href="contact.html">Contact</a></li>
 
 				</ul>
 			</nav>
 			<!-- .nav-menu -->
-           					<security:authorize access="!isAuthenticated()">
-		<a href="<%=request.getContextPath()%>/login" class="get-started-btn">Get Started</a>
-					</security:authorize>
-					<security:authorize access="isAuthenticated()">
-		<a href="<%=request.getContextPath()%>/homepage" class="get-started-btn">Get Started</a>
-					</security:authorize>
-	
+
+			<security:authorize access="!isAuthenticated()">
+				<a href="<%=request.getContextPath()%>/login"
+					class="get-started-btn">Login</a>
+			</security:authorize>
+
+			<security:authorize access="isAuthenticated()">
+				<a href="<%=request.getContextPath()%>/homepage"
+					class="get-started-btn">Home Page</a>
+
+
+			</security:authorize>
 
 		</div>
 	</header>

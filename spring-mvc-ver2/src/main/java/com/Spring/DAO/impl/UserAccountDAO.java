@@ -19,12 +19,7 @@ public class UserAccountDAO extends AbstractDAO<UserAccount> implements IUserAcc
 
 	public static void main(String[] args) {
 		UserAccountDAO u = new UserAccountDAO();
-		UserAccount a = new UserAccount();
-		a.setPassword("tien2");
-		a.setUserName("123456");
-		a.setRole("ROLE_USER");
-		a.setEnable(1);
-		System.out.println(u.register(a));
+System.out.println(u.findIdByUserName("tien1").toString());
 	}
 
 	@Override
@@ -51,7 +46,7 @@ public class UserAccountDAO extends AbstractDAO<UserAccount> implements IUserAcc
 	      return insert(sql,u);
 	}
  
-	public List<UserAccount> findUserName(String username){
+	public List<UserAccount> findIdByUserName(String username){
 		StringBuilder sql = new StringBuilder("SELECT * FROM useraccount WHERE username=?");
       
      UserAccount u = new UserAccount();
@@ -82,4 +77,6 @@ public class UserAccountDAO extends AbstractDAO<UserAccount> implements IUserAcc
 		return false;
 	}
 
+	
+	
 }

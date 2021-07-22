@@ -30,5 +30,18 @@ public class SubjectService implements ISubjectService{
 		return dao.findTutorsBySubject(name);
 	}
 
-
+public String findSubjectByTutorId(int id) {
+	List<Subject> list = dao.findSubjectsOfTeacher(id);
+	String subjects="";
+	if(list.size()==1)
+		return list.get(0).getName();
+	else {
+		String sub = list.get(0).getName();
+		for(int i=1; i<list.size();i++) {
+			sub+=","+list.get(i).getName();
+		}
+		return sub;
+	}
+	
+}
 }

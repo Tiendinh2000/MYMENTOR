@@ -34,9 +34,12 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 	public static void main(String[] args) {
 		
 		TutorListDAO l = new TutorListDAO();
-		
-		System.out.println(l.SubjectsOfTutor(0));
-		
+		String subj ="";
+		for(Subject s :l.SubjectsOfTutor(2)) {
+			subj+=s.getName()+",";
+		}
+		System.out.println(subj);
+		System.out.println(l.findAll().toString());
 //		List<Tutor> l1 = l.findAll();
 //	   for(Tutor t :l1) {
 //		  String subjectName = l.getSubjectName(l.SubjectsOfTutor(t.getId()));
@@ -44,19 +47,15 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 //	   }
 //	   
 //	   System.out.println(l1.toString());
-	
-		
-		
-		
+
 	}
 
-	
 
 	
 	@Override
 	public void insert(Tutor t) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO tutor(id_Tutor,Tutor_name,Tutor_gender,Tutor_phonenumber,Tutor_address, Tutor_credential,Tutor_experienceyear,Tutor_description) VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO tutor(id_Tutor,Tutor_name,Tutor_gender,Tutor_phonenumber,Tutor_address, Tutor_credential,Tutor_experienceyear,Tutor_description,fk_AccountId) VALUES (?,?,?,?,?,?,?,?,?)";
 		insert(sql, t);
 	}
 
@@ -124,24 +123,4 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 
 	}
 	
-	public String getSubjectName(List<Subject> subjects) {
-		String result="";
-		for(Subject s: subjects) {
-			result+=s.getName()+", ";
-		}
-		
-		return result;
-	}
-	
-	public List<Tutor> TutorWithSubjectList(){
-		
-	TutorListDAO dao = new TutorListDAO();
-	
-      List<Tutor> list = dao.findAll();
-		   for(Tutor t :list) {
-				  String subjectName = dao.getSubjectName(dao.SubjectsOfTutor(t.getId()));
-				 t.setSubjects(subjectName);
-			   }
-		   return list;
-	}
 }
