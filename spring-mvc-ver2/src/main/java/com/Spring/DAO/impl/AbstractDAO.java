@@ -95,7 +95,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			connection = getConnection();
 
 			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
 			setParameter(statement, parameters);
 
 			System.out.println("vao");

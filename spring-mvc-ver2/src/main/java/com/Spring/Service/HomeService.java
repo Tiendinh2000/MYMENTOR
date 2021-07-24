@@ -11,4 +11,5 @@ public interface HomeService {
   void delete(int id);
   void update(Tutor newTutor );
   Tutor findByID(int id);
+  boolean registrySubject(int tutorId, int subjectId);
 }

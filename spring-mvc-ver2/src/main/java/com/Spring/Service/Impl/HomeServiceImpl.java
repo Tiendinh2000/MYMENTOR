@@ -13,20 +13,20 @@ import com.Spring.Models.UserAccount;
 import com.Spring.Service.HomeService;
 
 @Service
-public class HomeServiceImpl implements HomeService{
-	
+public class HomeServiceImpl implements HomeService {
+
 	@Autowired
 	private TutorListDAO dao;
 
 	@Override
 	public List<Tutor> findAll() {
-   return dao.findAll();
+		return dao.findAll();
 	}
 
 	@Override
 	public void insert(Tutor t) {
 		dao.insert(t);
-		
+
 	}
 
 	@Override
@@ -44,15 +44,38 @@ public class HomeServiceImpl implements HomeService{
 	@Override
 	public Tutor findByID(int id) {
 		List l = dao.findById(id);
-		if(l.size()==1) 
+		if (l.size() == 1)
 			return (Tutor) l.get(0);
 		else
-		  return null;
+			return null;
 	}
 
-	
-	
+	@Override
+	public boolean registrySubject(int tutorId, int subjectId) {
+		return dao.registrySubject(tutorId, subjectId);
+	}
 
+	public boolean registryAsTutor(Tutor t, String SubjectsName) {
+		List ids = new ArrayList<Integer>();
 
-	
+		for (char c : SubjectsName.toCharArray()) {
+			if (c == 'M')
+				ids.add(1);
+			if (c == 'E')
+				ids.add(2);
+			if (c == 'L')
+				ids.add(3);
+		}
+		int[] array = new int[ids.size()];
+		int index = 0;
+		for (Object i : ids) {
+			array[index] = (int) i;
+			index++;
+		}
+
+		
+		dao.registryAsTutor(t, array);
+		return true;
+	}
+
 }

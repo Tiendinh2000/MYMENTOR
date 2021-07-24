@@ -34,11 +34,11 @@ public String findSubjectByTutorId(int id) {
 	List<Subject> list = dao.findSubjectsOfTeacher(id);
 	String subjects="";
 	if(list.size()==1)
-		return list.get(0).getName();
+		return list.get(0).getSubjectName();
 	else {
-		String sub = list.get(0).getName();
+		String sub = list.get(0).getSubjectName();
 		for(int i=1; i<list.size();i++) {
-			sub+=","+list.get(i).getName();
+			sub+=","+list.get(i).getSubjectName();
 		}
 		return sub;
 	}

@@ -14,7 +14,7 @@ public class SubjectMapper implements RowMapper {
 		try {
 			Subject s = new Subject();
 			s.setId(rs.getInt("id_subject"));
-			s.setName(rs.getString("subject_name"));
+			s.setSubjectName(rs.getString("subject_name"));
 			return s;
 		}catch (Exception e) {
 			e.printStackTrace();

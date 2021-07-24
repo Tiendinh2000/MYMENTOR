@@ -82,7 +82,7 @@
 							<li><a
 								href="<%=request.getContextPath()%>/user/literature_tutors">Literature</a></li>
 						</ul></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="<%=request.getContextPath()%>/user/contact">Contact</a></li>
 
 				</ul>
 			</nav>

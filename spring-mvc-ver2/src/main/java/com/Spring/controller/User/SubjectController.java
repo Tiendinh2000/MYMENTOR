@@ -1,13 +1,17 @@
 package com.Spring.controller.User;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.Spring.Models.Subject;
 import com.Spring.Service.Impl.SubjectService;
 
 @Controller
@@ -41,6 +45,6 @@ public class SubjectController {
 		return mav;
 	}
 	
-	
+
 
 }

@@ -1,9 +1,11 @@
 package com.Spring.DAO.impl;
 
+import java.awt.Taskbar.State;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,20 +36,7 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 	public static void main(String[] args) {
 		
 		TutorListDAO l = new TutorListDAO();
-		String subj ="";
-		for(Subject s :l.SubjectsOfTutor(2)) {
-			subj+=s.getName()+",";
-		}
-		System.out.println(subj);
-		System.out.println(l.findAll().toString());
-//		List<Tutor> l1 = l.findAll();
-//	   for(Tutor t :l1) {
-//		  String subjectName = l.getSubjectName(l.SubjectsOfTutor(t.getId()));
-//		 t.setSubject(subjectName);
-//	   }
-//	   
-//	   System.out.println(l1.toString());
-
+System.out.println(l.findAll().toString());
 	}
 
 
@@ -122,5 +111,72 @@ public class TutorListDAO extends AbstractDAO<Tutor> implements ITutorDAO {
 		return list;
 
 	}
+	
+	public boolean registrySubject(int tutor_id,int  subject_id) {
+		String sql = "INSERT INTO tutor_subject(tutor_id_Tutor,subject_id_subject) VALUES (?,?) ";
+		try {
+			Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, tutor_id);
+			preparedStatement.setInt(2, subject_id);
+			preparedStatement.executeQuery();
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}	
+		//(Tutor_name,Tutor_gender,Tutor_phonenumber,Tutor_address,Tutuor_credential,Tutor_experienceyear,Tutor_description,fk_AccountId)
+		
+	}
+	
+	
+	public boolean registryAsTutor(Tutor t,int...id) {
+
+	String sql = "INSERT INTO tutor(Tutor_name,Tutor_gender,Tutor_phonenumber,Tutor_address, Tutor_credential,Tutor_experienceyear,Tutor_description,fk_AccountId) VALUES (?,?,?,?,?,?,?,?);";
+	String sql1= "INSERT INTO tutor_subject(tutor_id_Tutor,subject_id_subject) VALUES (?,?) ";
+			
+			int inserted_id;
+			try {
+				Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+				
+				preparedStatement.setString(1,t.getTutorName());
+				preparedStatement.setString(2,t.getGender());
+				preparedStatement.setString(3,t.getPhonenumber());
+				preparedStatement.setString(4,t.getAddress());
+				preparedStatement.setString(5,t.getCredential());
+				preparedStatement.setInt(6,t.getExperienceYear());
+				preparedStatement.setString(7,t.getDescription());
+				preparedStatement.setInt(8,t.getAccount_id());
+				
+				preparedStatement.executeUpdate();
+				
+		        try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		                inserted_id=(int)generatedKeys.getLong(1);
+		            }
+		            else {
+		                throw new SQLException("Creating user failed, no ID obtained.");
+		            }
+		            
+		            //this stament for insert subjects of tutor
+		            for(int i : id) {
+		         PreparedStatement preparedStatement2 =connection.prepareStatement(sql1);
+		         preparedStatement2.setInt(1, inserted_id);
+		         preparedStatement2.setInt(2, i);
+		         preparedStatement2.executeUpdate();
+		         System.out.println(i);
+		         }
+		         
+		        }
+				return true;
+			}catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			
+	
+	}
+	
 	
 }

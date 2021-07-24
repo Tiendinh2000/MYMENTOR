@@ -62,7 +62,7 @@
             <div class="member">
               <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
               <div class="member-content">
-                <h4>${entry.key.name}</h4>
+                <h4>${entry.key.tutorName}</h4>
               
                 <div>Subject: ${entry.value}</div>
                 <p>

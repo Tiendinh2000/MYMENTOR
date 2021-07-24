@@ -3,13 +3,12 @@ package com.Spring.Models;
 public class Tutor {
 
 	private int id;
-	private String name;
+	private String tutorName;
 	private String gender;
 	private String phonenumber;
 	private String credential;
 	private String address;
 	private int experienceYear;
-
     private String description;
     private int Account_id;
 	public Tutor() {
@@ -19,12 +18,12 @@ public class Tutor {
 		this.id = id;
 	}
 
-	public Tutor(int id, String name, String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
+	public Tutor(int id, String tutorName, String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
 		this.id = id;
 		this.credential = credential;
 		this.gender=gender;
 		this.phonenumber=phonenumber;
-		this.name = name;
+		this.tutorName = tutorName;
 		this.address = address;
 		this.experienceYear = experienceYear;
 
@@ -32,11 +31,11 @@ public class Tutor {
 		this.Account_id=AccountId;
 	}
 
-	public Tutor(String name,String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
+	public Tutor(String tutorName,String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
 		this.credential = credential;
 		this.gender=gender;
 		this.phonenumber=phonenumber;
-		this.name = name;
+		this.tutorName = tutorName;
 		this.address = address;
 		this.experienceYear = experienceYear;
         this.description= description;
@@ -54,12 +53,13 @@ public class Tutor {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+
+	public String getTutorName() {
+		return tutorName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTutorName(String tutorName) {
+		this.tutorName = tutorName;
 	}
 
 	public String getAddress() {
@@ -125,7 +125,7 @@ public class Tutor {
 
 	@Override
 	public String toString() {
-		return "Tutor [id=" + id + ", name= " + name + ", gender="+gender+", phonenumber= "+phonenumber+", credential="  + credential + ", address=" + address
+		return "Tutor [id=" + id + ", name= " + tutorName + ", gender="+gender+", phonenumber= "+phonenumber+", credential="  + credential + ", address=" + address
 				+ ", experienceYear=" + experienceYear + ",des= " + description+ "]";
 	}
 

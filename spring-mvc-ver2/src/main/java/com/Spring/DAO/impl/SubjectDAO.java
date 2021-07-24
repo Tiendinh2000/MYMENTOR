@@ -40,7 +40,6 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 			 preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, IdTutor);
 			preparedStatement.setInt(2, IdSubject);
-			
 			preparedStatement.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -100,4 +99,5 @@ Tutor t = new TutorMapper().mapRow(rs, 0);
 		return list;
 	}
 
+	
 }

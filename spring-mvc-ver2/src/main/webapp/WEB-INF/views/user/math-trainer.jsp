@@ -59,7 +59,7 @@
             <div class="member">
               <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
               <div class="member-content">
-                <h4>${tutor.gender} ${tutor.name}</h4>
+                <h4>${tutor.gender} ${tutor.tutorName}</h4>
                 <div>Subject: ${SubjectName}</div>
                 <p>
                 ${tutor.description}

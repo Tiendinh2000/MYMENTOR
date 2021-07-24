@@ -135,14 +135,16 @@ button:focus {
 								<label class="form-control-label px-3">Your full name<span
 									class="text-danger"> *</span></label>
 								<form:input type="text" id="fname" name="fname" path="name"
-									placeholder="Enter your first name" onblur="validate(1)" required="required" />
+									placeholder="Enter your first name" onblur="validate(1)"
+									required="required" />
 							</div>
 
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">Address<span
 									class="text-danger"> *</span></label>
 								<form:input path="address" type="text" id="lname" name="lname"
-									placeholder="Enter your last name" onblur="validate(2)" required="required" />
+									placeholder="Enter your last name" onblur="validate(2)"
+									required="required" />
 							</div>
 						</div>
 
@@ -153,14 +155,14 @@ button:focus {
 									(optional)<span class="text-danger"> *</span>
 								</label>
 								<form:input path="credential" type="text" id="email"
-									name="email" placeholder="" onblur="validate(3)"  />
+									name="email" placeholder="" onblur="validate(3)" />
 							</div>
 
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">Phone number<span
 									class="text-danger"> *</span></label>
 								<form:input path="phonenumber" type="text" id="mob" name="mob"
-									placeholder="" onblur="validate(4)" required="required"  />
+									placeholder="" onblur="validate(4)" required="required" />
 							</div>
 						</div>
 
@@ -169,17 +171,18 @@ button:focus {
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">Gender<span
 									class="text-danger"> *</span></label>
-																<form:select class="form-select" path="gender" required="required" >
-								<form:option value="M">Male</form:option>
-								<form:option value="F">Female</form:option>
-							</form:select>
+								<form:select class="form-select" path="gender"
+									required="required">
+									<form:option value="M">Male</form:option>
+									<form:option value="F">Female</form:option>
+								</form:select>
 							</div>
 
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">experienceYear<span
 									class="text-danger"> *</span></label>
 								<form:input path="experienceYear" type="text" id="job"
-									name="job" placeholder=""   />
+									name="job" placeholder="" />
 							</div>
 
 
@@ -196,10 +199,18 @@ button:focus {
 							</div>
 						</div>
 
-						<div class="row justify-content-end">
-							<div class="form-group col-sm-6">
-								<button type="submit" class="btn-block btn-primary">Request
-									a demo</button>
+						<div class="row justify-content-between text-left">
+							<div class="form-group col-12 flex-column d-flex">
+								<label class="form-control-label px-3">description<span
+									class="text-danger"> *</span>
+								</label>
+								<form:form action="./registrySubject" method="POST" modelAttribute="subject">
+                             English<form:checkbox path="subjectName" value="E" />
+                             Math<form:checkbox path="subjectName" value="M" />
+                             Literature<form:checkbox path="subjectName" value="L" />
+                             <input type="submit" value="Submit">
+								</form:form>
+								
 							</div>
 						</div>
 

@@ -2,19 +2,19 @@ package com.Spring.Models;
 
 public class Subject {
 private int id;
-private String name;
+private String subjectName;
 
 
 public Subject() {
 }
-public Subject(int id, String name) {
+public Subject(int id, String subjectName) {
 	super();
 	this.id = id;
-	this.name = name;
+	this.subjectName = subjectName;
 }
 
-public Subject(String name) {
-	this.name = name;
+public Subject(String subjectName) {
+	this.subjectName = subjectName;
 }
 public int getId() {
 	return id;
@@ -22,17 +22,18 @@ public int getId() {
 public void setId(int id) {
 	this.id = id;
 }
-public String getName() {
-	return name;
-}
-public void setName(String name) {
-	this.name = name;
-}
 
+
+public String getSubjectName() {
+	return subjectName;
+}
+public void setSubjectName(String subjectName) {
+	this.subjectName = subjectName;
+}
 @Override
 	public String toString() {
 	
-	return "id "+id + ": "+ name;
+	return "id "+id + ": "+ subjectName;
 	}
 
 }
