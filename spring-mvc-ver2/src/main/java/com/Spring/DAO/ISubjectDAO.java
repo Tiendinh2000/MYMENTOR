@@ -2,7 +2,7 @@ package com.Spring.DAO;
 
 import java.util.List;
 
-import com.Spring.Models.Subject;
+import com.Spring.model.Subject;
 
 public interface ISubjectDAO extends GenericDAO<Subject> {
 

@@ -1,4 +1,7 @@
-package com.Spring.Models;
+package com.Spring.DTO;
+
+import com.Spring.model.Subject;
+import com.Spring.model.Tutor;
 
 public class TutorWithSubject {
 private Tutor tutor;

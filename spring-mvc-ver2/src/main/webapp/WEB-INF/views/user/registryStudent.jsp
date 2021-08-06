@@ -118,7 +118,8 @@ button:focus {
 	<div class="container-fluid px-1 py-5 mx-auto">
 		<div class="row d-flex justify-content-center">
 			<div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-				<h3>Let's become our Mentor</h3>
+				<h3>Do you want someone to help you solve difficult subjects?
+					Are you looking for a teacher for your child?</h3>
 				<p class="blue-text">
 					Just answer a few questions<br> so that we can personalize the
 					right experience for you.
@@ -127,69 +128,80 @@ button:focus {
 					<h5 class="text-center mb-4">Powering world-class companies</h5>
 
 
-					<form:form action="./registryTutor" method="POST"  enctype="multipart/form-data"
-						modelAttribute="registryTutor"  class="form-card">
+					<form:form action="./registryStudent" method="POST"
+						modelAttribute="registryStudent" class="form-card">
 
 						<div class="row justify-content-between text-left">
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">Your full name<span
 									class="text-danger"> *</span></label>
 								<form:input type="text" id="fname" name="fname"
-									path="tutor.tutorName" placeholder="Enter your first name"
+									path="student.studentName" placeholder="Enter your first name"
 									onblur="validate(1)" required="required" />
 							</div>
 
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">Address<span
 									class="text-danger"> *</span></label>
-								<form:input path="tutor.address" type="text" id="lname"
-									name="lname" placeholder="Enter your last name"
-									onblur="validate(2)" required="required" />
+								<form:input path="student.address" type="text" id="lname"
+									name="lname" placeholder="Address" onblur="validate(2)"
+									required="required" />
 							</div>
 						</div>
 
 						<div class="row justify-content-between text-left">
 
 							<div class="form-group col-sm-6 flex-column d-flex">
-								<label class="form-control-label px-3">Your Credential
-									(optional)<span class="text-danger"> *</span>
-								</label>
-								<form:input path="tutor.credential" type="text" id="email"
-									name="credential" placeholder="" onblur="validate(3)" />
+								<label class="form-control-label px-3">Your Skill -
+									Abillitiy (optional) </label>
+								<form:select class="form-select" path="student.skill"
+									required="required">
+									<form:option value="A">GOOD</form:option>
+									<form:option value="B">IMMEDIATE</form:option>
+									<form:option value="C">BASIC</form:option>
+								</form:select>
 							</div>
 
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">Phone number<span
 									class="text-danger"> *</span></label>
-								<form:input path="tutor.phonenumber" type="text" id="mob"
+								<form:input path="student.phonenumber" type="text" id="mob"
 									name="mob" placeholder="" onblur="validate(4)"
 									required="required" />
 							</div>
 						</div>
 
 						<div class="row justify-content-between text-left">
+
 							<div class="form-group col-sm-6 flex-column d-flex">
-								<label class="form-control-label px-3">Gender<span
+								<label class="form-control-label px-3">Your Grade<span
 									class="text-danger"> *</span></label>
-								<form:select class="form-select" path="tutor.gender"
+								<form:select class="form-select" path="student.grade"
 									required="required">
-									<form:option value="M">Male</form:option>
-									<form:option value="F">Female</form:option>
+									<form:option value="1">1</form:option>
+									<form:option value="2">2</form:option>
+									<form:option value="3">3</form:option>
+									<form:option value="4">4</form:option>
+									<form:option value="5">5</form:option>
+									<form:option value="6">6</form:option>
+									<form:option value="7">7</form:option>
+									<form:option value="8">8</form:option>
+									<form:option value="9">9</form:option>
+									<form:option value="10">10</form:option>
+									<form:option value="11">11</form:option>
+									<form:option value="12">12</form:option>
+									<form:option value="13">College practice</form:option>
+							
 								</form:select>
 							</div>
 
-							<div class="form-group col-sm-6 flex-column d-flex">
-								<label class="form-control-label px-3">experienceYear<span
-									class="text-danger"> *</span></label>
-								<form:input path="tutor.experienceYear" type="text" id="job"
-									name="job" placeholder="" />
-							</div>
+	
 
 
 						</div>
 
 						<div class="row justify-content-between text-left">
-							<div class="form-group col-sm-6 flex-column d-flex">
+							<div class="form-group col-12 flex-column d-flex">
 								<label class="form-control-label px-3">Subject that you
 									teach: </label> <span> English <form:checkbox
 										path="subject.subjectName" value="E" />
@@ -197,41 +209,7 @@ button:focus {
 										value="M" />
 								</span> <span> Literature <form:checkbox
 										path="subject.subjectName" value="L" /></span>
-							</div>
 
-							<div class="form-group col-sm-6 flex-column d-flex">
-								<label class="form-control-label px-3">Image</label>
-
-								<input  type="file" id="image" name="image"
-									placeholder="" onchange="readURL(this);" />
-								<img id="blah" alt="your img" src="#">
-								<script type="text/javascript">
-									function readURL(input) {
-										if (input.files && input.files[0]) {
-											var reader = new FileReader();
-
-											reader.onload = function(e) {
-												$('#blah').attr('src',
-														e.target.result).width(
-														150).height(200);
-											};
-
-											reader
-													.readAsDataURL(input.files[0]);
-										}
-									}
-								</script>
-							</div>
-						</div>
-
-						<div class="row justify-content-between text-left">
-							<div class="form-group col-12 flex-column d-flex">
-								<label class="form-control-label px-3">description<span
-									class="text-danger"> *</span>
-								</label>
-								<form:input path="tutor.description" type="text" id="ans"
-									name="ans" placeholder="" onblur="validate(6)"
-									required="required" />
 							</div>
 						</div>
 

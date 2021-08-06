@@ -2,7 +2,7 @@ package com.Spring.DAO;
 
 import java.util.List;
 
-import com.Spring.Models.UserAccount;
+import com.Spring.model.UserAccount;
 
 public interface IUserAccountDAO extends GenericDAO<UserAccount> {
 

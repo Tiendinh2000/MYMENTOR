@@ -4,22 +4,23 @@ import java.util.List;
 
 import javax.sound.midi.Soundbank;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.Spring.DAO.IUserAccountDAO;
-import com.Spring.Models.Tutor;
-import com.Spring.Models.UserAccount;
-import com.Spring.Service.IUserAccountService;
 import com.Spring.mapper.UserAccountMapper;
+import com.Spring.model.Tutor;
+import com.Spring.model.UserAccount;
+import com.Spring.Service.IUserAccountService;
 
 @Repository
-public class UserAccountDAO extends AbstractDAO<UserAccount> implements IUserAccountDAO {
+public class UserAccountDAO extends CRUDDAO<UserAccount> implements IUserAccountDAO {
 
 
 	public static void main(String[] args) {
 		UserAccountDAO u = new UserAccountDAO();
-System.out.println(u.findIdByUserName("tien1").toString());
+System.out.println(u.delete(4));
 	}
 
 	@Override
@@ -33,12 +34,13 @@ System.out.println(u.findIdByUserName("tien1").toString());
 	public boolean register(UserAccount u) {
 		UserAccount dercryptedAccount =u;
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		System.out.println(dercryptedAccount.toString());
 		String hashedPassword = passwordEncoder.encode(u.getPassword());
-
 		try {
 			dercryptedAccount.setPassword(hashedPassword);
-			dercryptedAccount.setRole(hashedPassword);
+			dercryptedAccount.setRole("ROLE_USER");
 			dercryptedAccount.setEnable(1);
+			System.out.println(dercryptedAccount.toString());
 		}catch (Exception e) {
 			return false;
 		}

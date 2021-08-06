@@ -55,9 +55,6 @@
 						<li><a href="<%=request.getContextPath()%>/login">Login</a></li>
 						<li><a href="<%=request.getContextPath()%>/user/getRegister">Register</a></li>
 					</security:authorize>
-					<security:authorize access="isAuthenticated()">
-						<li><a href="<c:url value="/logout" />">logout</a></li>
-					</security:authorize>
 
 
 					<li><a href="<%=request.getContextPath()%>/user/trainer">Trainers</a></li>
@@ -65,7 +62,11 @@
 						<li class="drop-down"><a href="">Creation</a>
 							<ul>
 								<li><a
-									href="<%=request.getContextPath()%>/user/registryTutorPage">Registery your self as Tutor</a></li>
+									href="<%=request.getContextPath()%>/user/registryTutorPage">Registery
+										yourself as Tutor</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/user/registryStudentPage">Registery
+										yourself as Student</a></li>
 							</ul></li>
 					</security:authorize>
 					<li class="drop-down"><a href="">Subject</a>
@@ -94,8 +95,22 @@
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">
-				<a href="<%=request.getContextPath()%>/homepage"
-					class="get-started-btn">Home Page</a>
+
+				<div class="dropdown show">
+					<a class="ml-5 btn btn-success dropdown-toggle" href="#"
+						role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> Welcome <security:authentication
+							property="principal.username" />
+					</a>
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item"
+							href="<%=request.getContextPath()%>/user/userTutors">Your Tutor profiles</a> 
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/user/userStudents">Your Student profiles</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+							<a class="dropdown-item" href="<c:url value="/logout" />">logout</a>
+					</div>
+				</div>
 
 
 			</security:authorize>

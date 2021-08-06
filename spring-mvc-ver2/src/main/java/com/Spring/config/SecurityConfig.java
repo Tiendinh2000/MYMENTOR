@@ -1,4 +1,4 @@
-package com.Spring.Config;
+package com.Spring.config;
 
 import javax.sql.DataSource;
 
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder()).dataSource(DataSource)
 				.usersByUsernameQuery("select username, password, enable from useraccount where username=?")
-				.authoritiesByUsernameQuery("select username, role from useraccount where username=?");
+				.authoritiesByUsernameQuery("select username, role from useraccount where username=?") ;
 	}
 
 	@Override

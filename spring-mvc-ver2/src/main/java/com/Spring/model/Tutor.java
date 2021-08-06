@@ -1,4 +1,4 @@
-package com.Spring.Models;
+package com.Spring.model;
 
 public class Tutor {
 
@@ -9,8 +9,9 @@ public class Tutor {
 	private String credential;
 	private String address;
 	private int experienceYear;
+	private String image;
     private String description;
-    private int Account_id;
+    private int fk_Account;
 	public Tutor() {
 	}
 
@@ -18,7 +19,7 @@ public class Tutor {
 		this.id = id;
 	}
 
-	public Tutor(int id, String tutorName, String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
+	public Tutor(int id, String tutorName, String gender, String phonenumber, String address, String credential, int experienceYear,String image,String description,int Account) {
 		this.id = id;
 		this.credential = credential;
 		this.gender=gender;
@@ -26,25 +27,27 @@ public class Tutor {
 		this.tutorName = tutorName;
 		this.address = address;
 		this.experienceYear = experienceYear;
-
+		this.image = image;
 		this.description=description;
-		this.Account_id=AccountId;
+		this.fk_Account=Account;
 	}
 
-	public Tutor(String tutorName,String gender, String phonenumber, String address, String credential, int experienceYear,String description,int AccountId) {
+	public Tutor(String tutorName,String gender, String phonenumber, String address, String credential, int experienceYear,String image,String description,int Account) {
 		this.credential = credential;
 		this.gender=gender;
 		this.phonenumber=phonenumber;
 		this.tutorName = tutorName;
 		this.address = address;
 		this.experienceYear = experienceYear;
+		this.image = image;
         this.description= description;
-    	this.Account_id=AccountId;
+    	this.fk_Account=Account;
 	}
 
 
 	
 	
+
 	public int getId() {
 		return id;
 	}
@@ -53,13 +56,36 @@ public class Tutor {
 		this.id = id;
 	}
 
-
 	public String getTutorName() {
 		return tutorName;
 	}
 
 	public void setTutorName(String tutorName) {
 		this.tutorName = tutorName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	public String getCredential() {
+		return credential;
+	}
+
+	public void setCredential(String credential) {
+		this.credential = credential;
 	}
 
 	public String getAddress() {
@@ -78,32 +104,6 @@ public class Tutor {
 		this.experienceYear = experienceYear;
 	}
 
-	public String getCredential() {
-		return credential;
-	}
-
-	public void setCredential(String credential) {
-		this.credential = credential;
-	}
-	
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getPhonenumber() {
-		return phonenumber;
-	}
-
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
-	}
-
-
 	public String getDescription() {
 		return description;
 	}
@@ -112,21 +112,29 @@ public class Tutor {
 		this.description = description;
 	}
 
-	
-	
-	
-	public int getAccount_id() {
-		return Account_id;
+	public int getFk_Account() {
+		return fk_Account;
 	}
 
-	public void setAccount_id(int account_id) {
-		Account_id = account_id;
+	public void setFk_Account(int fk_Account) {
+		this.fk_Account = fk_Account;
+	}
+	
+	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Override
 	public String toString() {
 		return "Tutor [id=" + id + ", name= " + tutorName + ", gender="+gender+", phonenumber= "+phonenumber+", credential="  + credential + ", address=" + address
-				+ ", experienceYear=" + experienceYear + ",des= " + description+ "]";
+				+ ", experienceYear=" + experienceYear +",image="+image + ",des= " + description+ ", fk ="+fk_Account+ "]";
 	}
+
 
 }

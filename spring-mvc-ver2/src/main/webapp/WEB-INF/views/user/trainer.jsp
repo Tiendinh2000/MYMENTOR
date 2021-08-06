@@ -60,7 +60,7 @@
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
-              <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
+              <img src="/image/${entry.key.image}" class="img-fluid" alt="image"/>
               <div class="member-content">
                 <h4>${entry.key.tutorName}</h4>
               
@@ -68,7 +68,7 @@
                 <p>
          
                 </p>
-                <p>$</p>
+                <p></p>
                 <div class="social">
                   <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>

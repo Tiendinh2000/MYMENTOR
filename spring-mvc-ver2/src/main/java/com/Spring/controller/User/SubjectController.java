@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.Spring.Models.Subject;
+import com.Spring.model.Subject;
 import com.Spring.Service.Impl.SubjectService;
 
 @Controller

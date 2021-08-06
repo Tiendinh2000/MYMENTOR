@@ -31,7 +31,6 @@
 <body>
   <%@include file="layout/header.jsp" %> 
 
-<a href="<%=request.getContextPath()%>/login">Login</a>
 
  <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">

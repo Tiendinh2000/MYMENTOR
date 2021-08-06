@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import com.Spring.DAO.impl.SubjectDAO;
-import com.Spring.Models.Subject;
-import com.Spring.Models.Tutor;
+import com.Spring.model.Subject;
+import com.Spring.model.Tutor;
 import com.Spring.Service.ISubjectService;
 
 @Service

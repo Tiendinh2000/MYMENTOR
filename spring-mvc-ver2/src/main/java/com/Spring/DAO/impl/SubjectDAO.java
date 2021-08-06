@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import com.Spring.DAO.GenericDAO;
 import com.Spring.DAO.ISubjectDAO;
-import com.Spring.Models.Subject;
-import com.Spring.Models.Tutor;
 import com.Spring.mapper.SubjectMapper;
 import com.Spring.mapper.TutorMapper;
+import com.Spring.model.Subject;
+import com.Spring.model.Tutor;
 
 @Repository
-public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
+public class SubjectDAO extends CRUDDAO<Subject> implements ISubjectDAO {
 
 	@Override
 	public List<Subject> findAll() {
@@ -32,12 +32,12 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 	}
 
 	public boolean registrySubject(int IdTutor, int IdSubject) {
-		String sql ="INSERT INTO tutor_subject VALUES (?,?)";
+		String sql = "INSERT INTO tutor_subject VALUES (?,?)";
 		Connection connection;
 		PreparedStatement preparedStatement;
 		try {
 			connection = getConnection();
-			 preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, IdTutor);
 			preparedStatement.setInt(2, IdSubject);
 			preparedStatement.executeUpdate();
@@ -46,11 +46,9 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 			e.printStackTrace();
 			return false;
 		}
-		
-		
-		
+
 	}
-	
+
 	public List<Subject> findSubjectsOfTeacher(int id) {
 		String sql = "SELECT *  FROM subject "
 				+ "INNER JOIN tutor_subject ON tutor_subject.subject_id_subject=subject.id_subject "
@@ -65,7 +63,7 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 			while (rs.next()) {
 				int i = rs.getInt("id_subject");
 				String name = rs.getString("subject_name");
-				list.add(new Subject(i,name));
+				list.add(new Subject(i, name));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,22 +72,19 @@ public class SubjectDAO extends AbstractDAO<Subject> implements ISubjectDAO {
 		return list;
 	}
 
-	public List<Tutor> findTutorsBySubject(String nameOfSubject){
-		
-		
-		String sql =  "SELECT * FROM tutor "
-				+ "JOIN tutor_subject ON tutor.id_Tutor=tutor_subject.tutor_id_Tutor "
-				+ "JOIN subject ON subject.id_subject = tutor_subject.subject_id_subject "
-				+ "WHERE subject_name=?"; 
-		
+	public List<Tutor> findTutorsBySubject(String nameOfSubject) {
+
+		String sql = "SELECT * FROM tutor " + "JOIN tutor_subject ON tutor.id_Tutor=tutor_subject.tutor_id_Tutor "
+				+ "JOIN subject ON subject.id_subject = tutor_subject.subject_id_subject " + "WHERE subject_name=?";
+
 		List<Tutor> list = new ArrayList<Tutor>();
 		try {
 			Connection connection = getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1,nameOfSubject );
+			preparedStatement.setString(1, nameOfSubject);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-Tutor t = new TutorMapper().mapRow(rs, 0);
+				Tutor t = new TutorMapper().mapRow(rs, 0);
 				list.add(t);
 			}
 		} catch (SQLException e) {
@@ -99,5 +94,4 @@ Tutor t = new TutorMapper().mapRow(rs, 0);
 		return list;
 	}
 
-	
 }

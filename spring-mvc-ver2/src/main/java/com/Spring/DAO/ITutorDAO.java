@@ -2,7 +2,7 @@ package com.Spring.DAO;
 
 import java.util.List;
 
-import com.Spring.Models.Tutor;
+import com.Spring.model.Tutor;
 
 public interface ITutorDAO  extends GenericDAO<Tutor> {
 

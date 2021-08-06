@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.Spring.Models.Student;
+import com.Spring.model.Student;
 
 public class StudentMapper implements RowMapper {
 
@@ -14,11 +14,12 @@ public class StudentMapper implements RowMapper {
 		try {
 			Student t = new Student();
 			t.setId(rs.getInt("id_student"));
-			t.setName(rs.getString("Student_name"));
-			t.setAddress("Student_address");
+			t.setStudentName(rs.getString("Student_name"));
+			t.setAddress(rs.getString("Student_address"));
+			t.setPhonenumber(rs.getString("Student_phonenumber"));
 			t.setGrade(rs.getInt("Student_grade"));
-			t.setSubject(rs.getString("Student_subject"));
 			t.setSkill(rs.getString("Student_skill"));
+			t.setFk_accountId(rs.getInt("Fk_AccountId"));
 			return t;
 		} catch (SQLException e) {
 			e.printStackTrace();

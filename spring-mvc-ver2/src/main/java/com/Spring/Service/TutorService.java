@@ -2,10 +2,10 @@ package com.Spring.Service;
 
 import java.util.List;
 
-import com.Spring.Models.*;
+import com.Spring.model.*;
 
 
-public interface HomeService {
+public interface TutorService {
 	List<Tutor> findAll();
   void insert(Tutor t);
   void delete(int id);

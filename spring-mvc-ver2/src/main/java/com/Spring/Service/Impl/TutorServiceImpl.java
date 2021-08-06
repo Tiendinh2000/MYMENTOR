@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.Spring.DAO.ITutorDAO;
 import com.Spring.DAO.impl.TutorListDAO;
-import com.Spring.Models.Tutor;
-import com.Spring.Models.UserAccount;
-import com.Spring.Service.HomeService;
+import com.Spring.model.Tutor;
+import com.Spring.model.UserAccount;
+import com.Spring.Service.TutorService;
 
 @Service
-public class HomeServiceImpl implements HomeService {
+public class TutorServiceImpl implements TutorService {
 
 	@Autowired
 	private TutorListDAO dao;
@@ -26,7 +26,6 @@ public class HomeServiceImpl implements HomeService {
 	@Override
 	public void insert(Tutor t) {
 		dao.insert(t);
-
 	}
 
 	@Override
@@ -49,7 +48,13 @@ public class HomeServiceImpl implements HomeService {
 		else
 			return null;
 	}
+	
+	public List<Tutor> findTutorByAccountId(int id){
+		return dao.findByAccountId(id);
+	}
 
+	
+	
 	@Override
 	public boolean registrySubject(int tutorId, int subjectId) {
 		return dao.registrySubject(tutorId, subjectId);
@@ -57,7 +62,6 @@ public class HomeServiceImpl implements HomeService {
 
 	public boolean registryAsTutor(Tutor t, String SubjectsName) {
 		List ids = new ArrayList<Integer>();
-
 		for (char c : SubjectsName.toCharArray()) {
 			if (c == 'M')
 				ids.add(1);
@@ -74,8 +78,8 @@ public class HomeServiceImpl implements HomeService {
 		}
 
 		
-		dao.registryAsTutor(t, array);
-		return true;
+		return dao.registryAsTutor(t, array);
+		
 	}
 
 }

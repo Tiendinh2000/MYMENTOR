@@ -1,9 +1,17 @@
-package com.Spring.Models;
+package com.Spring.model;
+
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.UniqueElements;
+
+
 
 public class UserAccount {
 
 	private int id;
+	@Min(value=6,message = "Username must be more than 6 characters")
 	private String userName;
+	@Min(value=6,message = "Password must be more than 6 characters")
 	private String password;
 	private String role;
 	private int enable;

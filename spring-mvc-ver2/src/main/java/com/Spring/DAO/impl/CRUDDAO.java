@@ -1,5 +1,6 @@
 package com.Spring.DAO.impl;
 
+import java.io.ObjectInputStream.GetField;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,10 +14,10 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.Spring.DAO.GenericDAO;
-import com.Spring.Models.Tutor;
+import com.Spring.model.Tutor;
 
 
-public class AbstractDAO<T> implements GenericDAO<T> {
+public class CRUDDAO<T> implements GenericDAO<T> {
 
 
 	public Connection getConnection() {
@@ -154,7 +155,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 
 			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-			setParameterWithSingleAttribute(statement, parameters);
+			setParameterWithIds(statement, parameters);
 
 			System.out.println(statement.toString());
 			statement.executeUpdate();
@@ -200,10 +201,10 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			statement = connection.prepareStatement(sql);
 			// setParameter(statement, parameters);
 			System.out.println("vo");
-			setParameterWithSingleAttribute(statement, parameters);
+			setParameterWithIds(statement, parameters);
 			System.out.println(statement.toString());
 			resultSet = statement.executeQuery();
-			// System.out.println(resultSet.getString(1));
+		System.out.println("execute");
 			while (resultSet.next()) {
 				results.add(rowMapper.mapRow(resultSet, 0));
 			}
@@ -271,11 +272,13 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 
 	}
 
-	private void setParameterWithSingleAttribute(PreparedStatement statement, Object parameters) {
+	private void setParameterWithIds(PreparedStatement statement, Object parameters) {
 
+		
 		getAllFields(parameters).forEach(x -> {
-
 			x.setAccessible(true);
+			System.out.print(x.getType() == Integer.TYPE );
+			System.out.println(":"+x.getName());
 			// delete just by id
 			if (x.getType() == Integer.TYPE && x.getName().contains("id") == true) {
 				try {
@@ -342,8 +345,9 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			x.setAccessible(true);
 
 			try {
-				System.out.println(x.get(parameters) + " : " + x.getName());
+				System.out.print(x.get(parameters) + " : " + x.getName()+":");
 				System.out.println(x.getType() == Integer.TYPE);
+				System.out.println(x);
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -351,11 +355,12 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 
 			try {
 
-				if (x.get(parameters) != null) {
+				if (x.get(parameters) != null ) {
 					if (x.getType().isAssignableFrom(String.class)) {
 						statement.setString(1, (String) x.get(parameters));
-						break;
-					} else if (x.getType() == Integer.TYPE) {
+					break;
+					} 
+					if (x.getType() == Integer.TYPE) {
 						statement.setInt(1, (Integer) x.get(parameters));
 						break;
 					}

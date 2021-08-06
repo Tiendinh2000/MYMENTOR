@@ -1,4 +1,4 @@
-package com.Spring.Config;
+package com.Spring.config;
 
 import java.io.IOException;
 import java.util.Set;

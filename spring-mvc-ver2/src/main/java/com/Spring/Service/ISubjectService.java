@@ -2,8 +2,8 @@ package com.Spring.Service;
 
 import java.util.List;
 
-import com.Spring.Models.Subject;
-import com.Spring.Models.Tutor;
+import com.Spring.model.Subject;
+import com.Spring.model.Tutor;
 
 public interface ISubjectService {
 	

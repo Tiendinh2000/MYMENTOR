@@ -1,4 +1,4 @@
-package com.Spring.Models;
+package com.Spring.model;
 
 public class Subject {
 private int id;

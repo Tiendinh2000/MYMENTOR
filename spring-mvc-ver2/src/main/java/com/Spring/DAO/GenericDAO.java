@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.Spring.Models.Tutor;
+import com.Spring.model.Tutor;
 
 
 

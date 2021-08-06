@@ -1,30 +1,39 @@
 package com.Spring.controller.User;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
-import com.Spring.Models.Subject;
-import com.Spring.Models.Tutor;
-import com.Spring.Models.TutorWithSubject;
-import com.Spring.Models.UserAccount;
-import com.Spring.Service.HomeService;
-import com.Spring.Service.Impl.HomeServiceImpl;
+import com.Spring.DTO.TutorWithSubject;
+import com.Spring.model.Student;
+import com.Spring.model.Subject;
+import com.Spring.model.Tutor;
+import com.Spring.model.UserAccount;
+
+import com.Spring.Service.TutorService;
+import com.Spring.Service.Impl.TutorServiceImpl;
+import com.Spring.Service.Impl.StudentService;
 import com.Spring.Service.Impl.SubjectService;
 import com.Spring.Service.Impl.UserAccountService;
 
@@ -35,11 +44,14 @@ public class HomeController {
 	UserAccountService userAccountservice;
 
 	@Autowired
-	HomeServiceImpl tutorService;
+	TutorServiceImpl tutorService;
 
 	@Autowired
 	SubjectService subjectService;
 
+	@Autowired
+StudentService studentService;
+	
 	@RequestMapping(value = "/user/homepage", method = RequestMethod.GET)
 	public ModelAndView page() {
 		ModelAndView mav = new ModelAndView("Homepage");
@@ -48,7 +60,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.GET)
-	public ModelAndView getLoging() {
+	public ModelAndView getLogin() {
 		ModelAndView mav = new ModelAndView("/user/userLogin");
 		return mav;
 	}
@@ -59,40 +71,25 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/user/register");
 		mav.addObject("newAccount", acc);
 		return mav;
-
 	}
 
 	@RequestMapping(value = "/user/Register", method = RequestMethod.POST)
-	public ModelAndView Register(@ModelAttribute UserAccount acc) {
-		ModelAndView mav = new ModelAndView("/user/homepage");
-		if (userAccountservice.register(acc) == true)
-			return mav;
+	public String Register(@Validated @ModelAttribute("newAccount") UserAccount acc, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors())
+			return "/user/register";
+
 		else {
-			mav.setViewName("404");
-			return mav;
+			userAccountservice.register(acc);
+			return "Homepage";
 		}
 
 	}
 
-	@RequestMapping(value = "/user/trainer", method = RequestMethod.GET)
-	public ModelAndView TutorListPage() {
-		ModelAndView mav = new ModelAndView("/user/trainer");
-		HashMap<Tutor, String> map = new HashMap<Tutor, String>();
-		List<Tutor> l = tutorService.findAll();
-		int num =1;
-		for (Tutor t : l) {
-			map.put(t, getSubjectById(t.getId()));
-			num++;
-			if(num==10)
-				break;
-		}
-		mav.addObject("hashmap", map);
-
-		return mav;
-	}
-
-	public String getSubjectById(int id) {
-		return subjectService.findSubjectByTutorId(id);
+	@RequestMapping(value = "/check/username", method = RequestMethod.GET)
+	private String checkUserName(String username) {
+		// if(userAccountservice.findIdByUserName(username)!=nu)
+		return "no";
 	}
 
 	@RequestMapping("/user/homepage")
@@ -104,28 +101,60 @@ public class HomeController {
 	private String getContact() {
 		return "/user/contact";
 	}
-	
-	/// TutorController
 
-	@RequestMapping(value = "/user/registryTutorPage", method = RequestMethod.GET)
-	public ModelAndView getRegistryTutorPage() {
-		TutorWithSubject t = new TutorWithSubject();
-		ModelAndView mav = new ModelAndView("/user/registryTutor");
-		mav.addObject("registryTutor", t);
+	////
+
+	@RequestMapping(value = "/user/userTutors", method = RequestMethod.GET)
+	public ModelAndView YourTutor(Principal principal) {
+		ModelAndView mav = new ModelAndView("/user/userTutorProfile");
+		int id = userAccountservice.findIdByUserName(getUserName(principal));
+		System.out.println("fined:" + id);
+		List<Tutor> list = tutorService.findTutorByAccountId(id);
+		mav.addObject("tutorList", list);
 		return mav;
-
 	}
 
-	@RequestMapping(value = "/user/registryTutor", method = RequestMethod.POST)
-	public ModelAndView getTutorInfor(@ModelAttribute TutorWithSubject t, Principal principal) {
-
-		System.out.println("subject:" + t.getSubject().getSubjectName() + " tutor;" + t.getTutor().toString());
-		String userName = principal.getName();
-	    int userId = userAccountservice.findIdByUserName(userName);
-	    Tutor tutor=t.getTutor();
-	    tutor.setAccount_id(userId);
-		tutorService.registryAsTutor(tutor, t.getSubject().getSubjectName());
-		return new ModelAndView("redirect:/homepage");
+	@RequestMapping(value = "/user/userDeleteTutor/{id}", method = RequestMethod.GET)
+	public String deleteTutor(@PathVariable(value = "id") int id) {
+		try {
+			tutorService.delete(id);
+			return "redirect:/user/userTutors";
+		} catch (Exception e) {
+			return "redirect:/404";
+		}
+ 
 	}
 
+	private String getUserName(Principal principal) {
+		return principal.getName();
+	}
+
+	@RequestMapping("/404")
+	private String get404() {
+		return "/404";
+	}
+	
+	///
+	@RequestMapping(value = "/user/userStudents", method = RequestMethod.GET)
+	public ModelAndView YourStudent(Principal principal) {
+		ModelAndView mav = new ModelAndView("/user/userStudentProfile");
+		int id = userAccountservice.findIdByUserName(getUserName(principal));
+		System.out.println("fined:" + id);
+		List<Student> list = studentService.findStudentByAccountId(id);
+		mav.addObject("studentList", list);
+		return mav;
+	}
+
+	@RequestMapping(value = "/user/userDeleteStudent/{id}", method = RequestMethod.GET)
+	public String deleteStudent(@PathVariable(value = "id") int id) {
+		try {
+			studentService.delete(id);
+			return "redirect:/user/userStudents";
+		} catch (Exception e) {
+			return "redirect:/404";
+		}
+ 
+	}
+	
+	
 }

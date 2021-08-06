@@ -70,26 +70,19 @@ a {
 	background-color: #f1f1f1;
 	text-align: center;
 }
+
+.error {
+	color: red
+}
 </style>
 
 
-<script type="text/javascript">
-var check = function() {
-	  if (document.getElementById('psw').value ==
-	    document.getElementById('psw-repeat').value) {
-	    document.getElementById('message').style.color = 'green';
-	    document.getElementById('message').innerHTML = 'matching';
-	    
-	  } else {
-	    document.getElementById('message').style.color = 'red';
-	    document.getElementById('message').innerHTML = 'not matching';
-	  }
-	}</script>
+
 </head>
 <body>
-	<%@include file="/WEB-INF/views/layout/header.jsp" %>
+	<%@include file="/WEB-INF/views/layout/header.jsp"%>
 
-	<form:form action="./Register" method="POST"
+	<form:form action="./Register" method="POST" id="create-form"
 		modelAttribute="newAccount">
 		<div class="container">
 			<h1>Register</h1>
@@ -99,17 +92,18 @@ var check = function() {
 			<div class="form-group">
 				<label>User Name:</label>
 				<form:input type="text" path="userName" required="required" />
+				<form:errors path="userName" cssClass="error" />
 			</div>
 
 			<div class="form-group">
 				<label>Password :</label>
 				<form:input type="text" path="password" id="psw" onkeyup='check();'
 					required="required" />
+					<form:errors path="password" cssClass="error" />
 			</div>
 
 			<div class="form-group">
-				<label>Confirm-Password :</label>
-				<form:input type="text" path="password" id="psw-repeat"
+				<label>Confirm-Password :</label> <input type="text" id="psw-repeat"
 					onkeyup='check();' required="required" />
 			</div>
 			<span id="message"></span>
@@ -118,7 +112,75 @@ var check = function() {
 					Privacy</a>.
 			</p>
 
-			<button type="submit" class="registerbtn">Register</button>
+			<button type="submit" id="registerbtn" class="registerbtn">Register</button>
+			<script type="text/javascript">
+				var check = function() {
+					if (document.getElementById('psw').value == document
+							.getElementById('psw-repeat').value) {
+						document.getElementById('message').style.color = 'green';
+						document.getElementById('message').innerHTML = 'matching';
+						document.getElementById("registerbtn").disabled = false;
+					} else {
+						document.getElementById("registerbtn").disabled = true;
+						document.getElementById('message').style.color = 'red';
+						document.getElementById('message').innerHTML = 'not matching';
+					}
+				}
+				jQuery(document).ready(function($) {
+
+			        $("#create-form").submit(function(event) {
+
+			            // Disble the search button
+			            enableSearchButton(false);
+
+			            // Prevent the form from submitting via the browser.
+			            event.preventDefault();
+
+			            searchViaAjax();
+
+			        });
+
+			    });
+
+			    function searchViaAjax() {
+
+			        var search = {}
+			        search["username"] = $("#username").val();
+			        search["email"] = $("#email").val();
+
+			        $.ajax({
+			            type : "GET",
+			            contentType : "text/plain",
+			            url : "",
+			            data : JSON.stringify(search),
+			            dataType : 'text/plain',
+			            timeout : 100000,
+			            success : function(data) {
+			                console.log("SUCCESS: ", data);
+			                display(data);
+			            },
+			            error : function(e) {
+			                console.log("ERROR: ", e);
+			                display(e);
+			            },
+			            done : function(e) {
+			                console.log("DONE");
+			                enableSearchButton(true);
+			            }
+			        });
+			    }
+
+			    function enableSearchButton(flag) {
+			        $("#btn-search").prop("disabled", flag);
+			    }
+
+			    function display(data) {
+			        var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
+			                + JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
+			        $('#feedback').html(json);
+			    }
+			</script>
+			
 		</div>
 
 		<div class="container signin">
@@ -129,8 +191,8 @@ var check = function() {
 		</div>
 
 	</form:form>
-	
-	
-	<%@include file="/WEB-INF/views/layout/footer.jsp" %>
+
+
+	<%@include file="/WEB-INF/views/layout/footer.jsp"%>
 </body>
 </html>

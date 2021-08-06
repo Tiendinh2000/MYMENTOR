@@ -57,7 +57,7 @@
         
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
-              <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
+              <img src="/image/${tutor.image}" class="img-fluid" alt="">
               <div class="member-content">
                 <h4>${tutor.gender} ${tutor.tutorName}</h4>
                 <div>Subject: ${SubjectName}</div>

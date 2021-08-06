@@ -1,5 +1,7 @@
 package com.Spring.controller.admin;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;     
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.Spring.Models.Tutor;
-import com.Spring.Service.HomeService;
-import com.Spring.Service.Impl.HomeServiceImpl;
+import com.Spring.model.Tutor;
+import com.Spring.Service.TutorService;
+import com.Spring.Service.Impl.TutorServiceImpl;
+import com.Spring.Service.Impl.UserAccountService;
 
 //@Controller(value="adminController")
 
@@ -23,8 +26,10 @@ import com.Spring.Service.Impl.HomeServiceImpl;
 public class HomeController {
 
 	@Autowired
-    HomeService homeService;	
+    TutorService homeService;	
 
+	@Autowired
+	UserAccountService userAccountService;
 	
 	@RequestMapping(value = "/admin/TutorList", method = RequestMethod.GET)
 	public ModelAndView TutorListPage() {
@@ -43,7 +48,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/admin/insert", method = RequestMethod.POST)
-	public ModelAndView input(@ModelAttribute Tutor t) {
+	public ModelAndView input(@ModelAttribute Tutor t,Principal principal) {
+		String userName = principal.getName();
+		t.setFk_Account(userAccountService.findIdByUserName(userName));
 				homeService.insert(t);
 		return new ModelAndView("redirect:/admin/TutorList") ;
 		}
@@ -74,7 +81,6 @@ public class HomeController {
 	
 	@RequestMapping("/admin/success")
 	private String AdminSuccess() {
-		
-		return "daDangKi";}
+		return "redirect:/admin/TutorList";}
 	
 }

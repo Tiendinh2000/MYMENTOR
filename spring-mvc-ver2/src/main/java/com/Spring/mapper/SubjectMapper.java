@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.Spring.Models.Subject;
+import com.Spring.model.Subject;
 
 public class SubjectMapper implements RowMapper {
 

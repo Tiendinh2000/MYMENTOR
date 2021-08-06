@@ -20,26 +20,26 @@
     <thead>
       <tr>
         <th>id</th>
-        <th>name</th>
-        <th>Gender</th>
+        <th>Name</th>
+        <th>Skill</th>
         <th>Address</th>
         <th>Phone number</th>
-        <th>Credential</th>
-        <th>Year of Experience</th>
+        <th>Grade</th>
+        <th>Created by</th>
       </tr>
     </thead>
     <tbody>
-   <c:forEach items="${Tutormenu}" var="tutor">
+   <c:forEach items="${studentmenu}" var="student">
       <tr>
-        <td>${tutor.id}</td>
-        <td>${tutor.tutorName}</td>
-         <td>${tutor.gender}</td>
-        <td>${tutor.address}</td>
-        <td>${tutor.phonenumber}</td>
-         <td>${tutor.credential}</td>
-       <td>${tutor.experienceYear}</td>
+        <td>${student.id}</td>
+        <td>${student.studentName}</td>
+         <td>${student.skill}</td>
+        <td>${student.address}</td>
+        <td>${student.phonenumber}</td>
+         <td>${student.grade}</td>
+<td>${student.fk_accountId }</td>
 
-       <td>  <button class="delete" data-confirm="Are you sure to delete this item?" href="deleteTutor/${tutor.id}"> delete </button>
+       <td>  <button  class="delete" data-confirm="Are you sure to delete this item?" href="deleteTutor/${student.id}"> delete </button>
          <script > $('.delete').on("click", function (e) {
             e.preventDefault();
             var choice = confirm($(this).attr('data-confirm'));
@@ -52,7 +52,7 @@
         </script>
    </td>
        
-      <td>  <a href="editTutorPage?id=<c:out value='${tutor.id}'/> "> update</a></td>
+      <td>  <a href="editStudentPage?id=<c:out value='${student.id}'/> "> update</a></td>
       </tr>
      </c:forEach>
     </tbody>

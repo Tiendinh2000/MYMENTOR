@@ -2,7 +2,7 @@ package com.Spring.DAO;
 
 import java.util.List;
 
-import com.Spring.Models.Student;
+import com.Spring.model.Student;
 
 public interface IStudentDAO extends GenericDAO<Student> {
 
